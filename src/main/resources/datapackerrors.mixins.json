@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "package": "archives.tater.datapackerrors.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "RegistryDataLoaderMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  },
+  "client": [
+    "DatapackLoadFailureScreenMixin"
+  ]
+}
