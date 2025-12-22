@@ -1,8 +1,8 @@
 package archives.tater.datapackerrors;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
+import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
+import net.fabricmc.fabric.api.resource.v1.pack.PackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 
 import net.minecraft.ChatFormatting;
@@ -11,8 +11,8 @@ import net.minecraft.client.gui.components.FittingMultiLineTextWidget;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentUtils;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -45,7 +45,7 @@ public class DatapackErrorViewer implements ModInitializer {
                 140,
                 ComponentUtils.formatList(errors.entrySet().stream()
                         .map(entry ->
-                                Component.literal(entry.getKey().registry() + "/" + entry.getKey().location() + "\n")
+                                Component.literal(entry.getKey().registry() + "/" + entry.getKey().identifier() + "\n")
                                         .withStyle(ChatFormatting.WHITE)
                                         .append(ComponentUtils.formatList(
                                                 iterateUntilRepeat(entry.getValue(), Throwable::getCause)
@@ -67,10 +67,10 @@ public class DatapackErrorViewer implements ModInitializer {
 		// Proceed with mild caution.
 
         if (FabricLoader.getInstance().isDevelopmentEnvironment())
-            ResourceManagerHelper.registerBuiltinResourcePack(
-                    ResourceLocation.fromNamespaceAndPath(MOD_ID, "testerror"),
+            ResourceLoader.registerBuiltinPack(
+                    Identifier.fromNamespaceAndPath(MOD_ID, "testerror"),
                     FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(),
-                    ResourcePackActivationType.NORMAL
+                    PackActivationType.NORMAL
             );
 	}
 }

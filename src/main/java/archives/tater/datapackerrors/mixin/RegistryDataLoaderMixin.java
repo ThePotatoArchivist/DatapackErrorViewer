@@ -17,7 +17,7 @@ import java.util.Map;
 @Mixin(RegistryDataLoader.class)
 public class RegistryDataLoaderMixin {
     @Inject(
-            method = "load(Lnet/minecraft/resources/RegistryDataLoader$LoadingFunction;Lnet/minecraft/core/RegistryAccess;Ljava/util/List;)Lnet/minecraft/core/RegistryAccess$Frozen;",
+            method = "load(Lnet/minecraft/resources/RegistryDataLoader$LoadingFunction;Ljava/util/List;Ljava/util/List;)Lnet/minecraft/core/RegistryAccess$Frozen;",
             at = @At("HEAD")
     )
     private static void clearErrors(CallbackInfoReturnable<RegistryAccess.Frozen> cir) {
@@ -25,8 +25,8 @@ public class RegistryDataLoaderMixin {
     }
 
     @ModifyArg(
-            method = "load(Lnet/minecraft/resources/RegistryDataLoader$LoadingFunction;Lnet/minecraft/core/RegistryAccess;Ljava/util/List;)Lnet/minecraft/core/RegistryAccess$Frozen;",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/resources/RegistryDataLoader;logErrors(Ljava/util/Map;)V"),
+            method = "load(Lnet/minecraft/resources/RegistryDataLoader$LoadingFunction;Ljava/util/List;Ljava/util/List;)Lnet/minecraft/core/RegistryAccess$Frozen;",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/resources/RegistryDataLoader;logErrors(Ljava/util/Map;)Lnet/minecraft/ReportedException;"),
             index = 0
     )
     private static Map<ResourceKey<?>, Exception> getErrors(Map<ResourceKey<?>, Exception> errors) {

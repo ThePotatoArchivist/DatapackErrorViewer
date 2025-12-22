@@ -40,7 +40,7 @@ public abstract class DatapackLoadFailureScreenMixin extends Screen {
 
     @ModifyArg(
             method = "render",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/MultiLineLabel;renderCentered(Lnet/minecraft/client/gui/GuiGraphics;II)V"),
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/MultiLineLabel;visitLines(Lnet/minecraft/client/gui/TextAlignment;IIILnet/minecraft/client/gui/ActiveTextCollector;)I"),
             index = 2
     )
     private int moveUpText(int y) {
