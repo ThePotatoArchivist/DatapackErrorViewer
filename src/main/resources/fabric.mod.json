@@ -5,13 +5,13 @@
 	"name": "DatapackErrorViewer",
 	"description": "This is an example description! Tell everyone what your mod is about!",
 	"authors": [
-		"Me!"
+		"ThePotatoArchivist"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://modrinth.com/mod/datapack-error-viewer",
+		"sources": "https://github.com/ThePotatoArchivist/DatapackErrorViewer"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/datapackerrors/icon.png",
 	"environment": "client",
 	"entrypoints": {
