@@ -8,14 +8,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.components.FittingMultiLineTextWidget;
 import net.minecraft.client.gui.screens.DatapackLoadFailureScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.ComponentUtils;
-
-import static archives.tater.datapackerrors.DatapackErrorViewer.iterateUntilRepeat;
 
 @Mixin(DatapackLoadFailureScreen.class)
 public abstract class DatapackLoadFailureScreenMixin extends Screen {
@@ -38,29 +33,9 @@ public abstract class DatapackLoadFailureScreenMixin extends Screen {
             at = @At("TAIL")
     )
     private void addErrorText(CallbackInfo ci) {
-        var errors = DatapackErrorViewer.errors;
-        if (errors == null) return;
-        this.addRenderableWidget(new FittingMultiLineTextWidget(width / 2 - 180,
-                height / 2 - 60,
-                360,
-                140,
-                ComponentUtils.formatList(errors.entrySet().stream()
-                        .map(entry ->
-                                Component.literal(entry.getKey().registry() + "/" + entry.getKey().location() + "\n")
-                                        .withStyle(ChatFormatting.WHITE)
-                                        .append(
-                                                ComponentUtils.formatList(
-                                                        iterateUntilRepeat(entry.getValue(), Throwable::getCause)
-                                                                .map(throwable -> Component.literal(throwable.getMessage())
-                                                                        .withStyle(ChatFormatting.GRAY))
-                                                                .toList(),
-                                                        Component.literal("\n")
-                                                )
-                                        ))
-                        .toList(),
-                        Component.literal("\n\n")),
-                font
-        ));
+        var errorsWidget = DatapackErrorViewer.getErrorsWidget(this, font);
+        if (errorsWidget == null) return;
+        addRenderableWidget(errorsWidget);
     }
 
     @ModifyArg(
