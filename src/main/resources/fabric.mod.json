@@ -2,7 +2,7 @@
 	"schemaVersion": 1,
 	"id": "datapackerrors",
 	"version": "${version}",
-	"name": "DatapackErrorViewer",
+	"name": "Datapack Error Viewer",
 	"description": "This is an example description! Tell everyone what your mod is about!",
 	"authors": [
 		"ThePotatoArchivist"
