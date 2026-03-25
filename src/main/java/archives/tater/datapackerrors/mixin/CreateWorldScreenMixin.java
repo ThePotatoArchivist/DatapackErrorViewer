@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 @Mixin(CreateWorldScreen.class)
 public class CreateWorldScreenMixin {
     @ModifyArg(
-            method = "method_49629",
+            method = "lambda$applyNewPackConfig$5",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/ConfirmScreen;<init>(Lit/unimi/dsi/fastutil/booleans/BooleanConsumer;Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/Component;)V"),
             index = 0
     )
@@ -26,7 +26,7 @@ public class CreateWorldScreenMixin {
     }
 
     @ModifyArg(
-            method = "method_49629",
+            method = "lambda$applyNewPackConfig$5",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;setScreen(Lnet/minecraft/client/gui/screens/Screen;)V", ordinal = 0)
     )
     private Screen replaceScreen(@Nullable Screen guiScreen, @Share("callback") LocalRef<BooleanConsumer> callbackRef) {

@@ -39,7 +39,7 @@ public abstract class DatapackLoadFailureScreenMixin extends Screen {
     }
 
     @ModifyArg(
-            method = "render",
+            method = "extractRenderState",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/MultiLineLabel;visitLines(Lnet/minecraft/client/gui/TextAlignment;IIILnet/minecraft/client/gui/ActiveTextCollector;)I"),
             index = 2
     )

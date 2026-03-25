@@ -17,7 +17,7 @@ import java.util.Map;
 @Mixin(RegistryDataLoader.class)
 public class RegistryDataLoaderMixin {
     @Inject(
-            method = "load(Lnet/minecraft/resources/RegistryDataLoader$LoadingFunction;Ljava/util/List;Ljava/util/List;)Lnet/minecraft/core/RegistryAccess$Frozen;",
+            method = "lambda$load$0",
             at = @At("HEAD")
     )
     private static void clearErrors(CallbackInfoReturnable<RegistryAccess.Frozen> cir) {
@@ -25,7 +25,7 @@ public class RegistryDataLoaderMixin {
     }
 
     @ModifyArg(
-            method = "load(Lnet/minecraft/resources/RegistryDataLoader$LoadingFunction;Ljava/util/List;Ljava/util/List;)Lnet/minecraft/core/RegistryAccess$Frozen;",
+            method = "lambda$load$2",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/resources/RegistryDataLoader;logErrors(Ljava/util/Map;)Lnet/minecraft/ReportedException;"),
             index = 0
     )
